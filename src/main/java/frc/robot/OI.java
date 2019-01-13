@@ -35,13 +35,13 @@ public class OI {
 
   public double getThrottle()
 	{
-		return -m_controller.getY(GenericHID.Hand.kLeft)*.5;
+		return -m_controller.getY(GenericHID.Hand.kLeft);
   }
   
   public double getSteering()
 	{
 		//its negative because the getX was inverted
-		return m_controller.getX(GenericHID.Hand.kRight)*.5;
+		return m_controller.getX(GenericHID.Hand.kRight)*0.5;
 	}
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

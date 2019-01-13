@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
@@ -20,7 +20,7 @@ public class Drive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private static Drive m_singleton = null;
-	private Talon m_leftDrive, m_rightDrive;
+	private VictorSP m_leftDrive, m_rightDrive;
 	private DifferentialDrive m_drive;
 
  
@@ -34,8 +34,8 @@ public class Drive extends Subsystem {
 
   private Drive()
   {
-		m_rightDrive = new Talon(RobotMap.pwmRightDriveMotor);
-    m_leftDrive = new Talon(RobotMap.pwmLeftDriveMotor);
+		m_rightDrive = new VictorSP(RobotMap.pwmRightDriveMotor);
+    m_leftDrive = new VictorSP(RobotMap.pwmLeftDriveMotor);
     m_drive = new DifferentialDrive(m_leftDrive, m_rightDrive);
   }
 
