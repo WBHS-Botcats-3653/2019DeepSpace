@@ -7,11 +7,42 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
 public class OI {
+  private static OI m_singleton = null;
+	private XboxController m_controller = null;
+
+  private OI()
+  {
+    m_controller = new XboxController( 0 );
+  }
+
+  public static OI getInstance()
+	{
+		if(m_singleton ==  null)
+		{
+			m_singleton = new OI();
+		}
+		return m_singleton;
+	}
+
+  public double getThrottle()
+	{
+		return -m_controller.getY(GenericHID.Hand.kLeft)*.5;
+  }
+  
+  public double getSteering()
+	{
+		//its negative because the getX was inverted
+		return m_controller.getX(GenericHID.Hand.kRight)*.5;
+	}
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
