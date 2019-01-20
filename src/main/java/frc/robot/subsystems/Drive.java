@@ -38,7 +38,7 @@ public class Drive extends Subsystem {
   {
 		m_rightDriveMaster = new WPI_TalonSRX(RobotMap.canRightDriveMotorMaster);
     m_leftDriveMaster = new WPI_TalonSRX(RobotMap.canLeftDriveMotorMaster);
-    m_rightDriveSlave = new WPI_VictorSPX(RobotMap.canLeftDriveMotorSlave);
+    m_rightDriveSlave = new WPI_VictorSPX(RobotMap.canRightDriveMotorSlave);
     m_leftDriveSlave = new WPI_VictorSPX(RobotMap.canLeftDriveMotorSlave);
 
     m_rightDriveSlave.follow(m_rightDriveMaster);
