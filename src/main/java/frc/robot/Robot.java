@@ -16,6 +16,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Claw;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -27,7 +28,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi = null;
   private Drive m_drive =  null;
-
+  private Claw m_claw = null;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -36,9 +37,11 @@ public class Robot extends TimedRobot {
    * used for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit() 
+  {
     m_oi = OI.getInstance();
     m_drive = Drive.getInstance();
+    m_claw = Claw.getInstance();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

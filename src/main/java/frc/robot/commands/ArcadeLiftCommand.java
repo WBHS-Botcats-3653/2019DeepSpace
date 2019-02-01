@@ -8,19 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Claw;
 import frc.robot.OI;
 
-public class ArcadeDriveCommand extends Command {
-  private OI m_oi = null;
-  private Drive m_drive = null;
+public class ArcadeLiftCommand extends Command 
+{
   
-  public ArcadeDriveCommand() {
-    super( "Operator Control" );
+	private OI m_oi = null;
+  private Claw m_claw = null;
+  
+  public ArcadeLiftCommand() 
+  {
+    
 		m_oi = OI.getInstance();
-		m_drive = Drive.getInstance();
+		m_claw = Claw.getInstance();
 
-		requires( m_drive );
+		requires( m_claw );
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -34,7 +37,7 @@ public class ArcadeDriveCommand extends Command {
   @Override
   protected void execute() 
   {
-    m_drive.arcadeDrive(m_oi.getThrottle(), m_oi.getSteering());
+    m_claw.intake(m_oi.getLift());
   }
 
   // Make this return true when this Command no longer needs to run execute()

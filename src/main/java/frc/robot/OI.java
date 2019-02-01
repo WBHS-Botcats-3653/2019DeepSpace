@@ -42,7 +42,21 @@ public class OI {
 	{
 		//its negative because the getX was inverted
 		return m_controller.getX(GenericHID.Hand.kRight)*0.5;
-	}
+  }
+  
+  public double getLift()
+  {
+    double ret_value = 0.0;
+    if( 0.1 < m_controller.getTriggerAxis(GenericHID.Hand.kRight))
+    {
+      ret_value = m_controller.getTriggerAxis(GenericHID.Hand.kRight);
+    }
+    else if(0.1 < m_controller.getTriggerAxis(GenericHID.Hand.kLeft))
+    {
+      ret_value = -1 * m_controller.getTriggerAxis(GenericHID.Hand.kLeft);
+    }
+    return ret_value;
+  }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
