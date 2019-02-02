@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDriveCommand;
+
 /**
  * Add your docs here.
  */
@@ -31,8 +32,7 @@ public class Drive extends Subsystem {
 		setDefaultCommand(new ArcadeDriveCommand());
 	}
 
-	private Drive()
-	{
+	private Drive() {
 		m_rightDriveMaster = new WPI_TalonSRX(RobotMap.canRightDriveMotorMaster);
 		m_leftDriveMaster = new WPI_TalonSRX(RobotMap.canLeftDriveMotorMaster);
 		m_rightDriveSlave = new WPI_VictorSPX(RobotMap.canRightDriveMotorSlave);
@@ -44,15 +44,12 @@ public class Drive extends Subsystem {
 		m_drive = new DifferentialDrive(m_leftDriveMaster, m_rightDriveMaster);
 	}
 
-	public void arcadeDrive(double xSpeed, double zRotation)
-	{
+	public void arcadeDrive(double xSpeed, double zRotation) {
 		m_drive.arcadeDrive(xSpeed, zRotation);
 	}
 
-	public static Drive getInstance()
-	{
-		if (m_singleton == null)
-		{
+	public static Drive getInstance() {
+		if (m_singleton == null) {
 			m_singleton = new Drive();
 		}
 		return m_singleton;

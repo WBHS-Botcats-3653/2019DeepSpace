@@ -16,11 +16,11 @@ public class ArcadeDriveCommand extends Command {
 	private Drive m_drive = null;
 
 	public ArcadeDriveCommand() {
-		super( "Operator Control" );
+		super("Operator Control");
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 
-		requires( m_drive );
+		requires(m_drive);
 	}
 
 	// Called just before this Command runs the first time
