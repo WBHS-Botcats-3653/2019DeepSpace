@@ -22,4 +22,19 @@ public class Distance extends Subsystem {
   public double getVoltage() {
     return m_sonic.getAverageVoltage();
   }
+
+  public double getInches() {
+    return m_sonic.getAverageVoltage() / 0.281764 * 12;
+  }
+
+  public String getDistanceString() {
+    if (getInches() < 12)
+      return "Too close";
+    if (getInches() > 192)
+      return "Out of range";
+    long feet = Math.round(Math.floor(getInches() / 12));
+    long inches = Math.round(getInches() % 12);
+    return (feet + "\' " + inches + "\"");
+
+  }
 }

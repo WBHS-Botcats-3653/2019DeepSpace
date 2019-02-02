@@ -127,6 +127,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    SmartDashboard.putNumber("Distance", m_distance.getVoltage());
+    SmartDashboard.putString("Feet", m_distance.getDistanceString());
   }
 }
