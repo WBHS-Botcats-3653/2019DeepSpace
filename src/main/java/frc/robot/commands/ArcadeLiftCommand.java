@@ -11,49 +11,45 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Claw;
 import frc.robot.OI;
 
-public class ArcadeLiftCommand extends Command 
-{
-  
+public class ArcadeLiftCommand extends Command {
+
 	private OI m_oi = null;
-  private Claw m_claw = null;
-  
-  public ArcadeLiftCommand() 
-  {
-    
+	private Claw m_claw = null;
+
+	public ArcadeLiftCommand() {
 		m_oi = OI.getInstance();
 		m_claw = Claw.getInstance();
 
-		requires( m_claw );
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
+		requires(m_claw);
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-  }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() 
-  {
-    m_claw.intake(m_oi.getLift());
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		m_claw.intake(m_oi.getLift());
+	}
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }

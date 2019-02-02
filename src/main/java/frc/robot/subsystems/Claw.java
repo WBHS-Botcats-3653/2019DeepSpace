@@ -12,37 +12,37 @@ import edu.wpi.first.wpilibj.VictorSP;
 
 import frc.robot.commands.ArcadeLiftCommand;
 import frc.robot.RobotMap;
+
 /**
  * Add your docs here.
  */
-public class Claw extends Subsystem 
-{
-  private static Claw m_singleton = null;
-  private VictorSP m_leftArmMotor;
-  private VictorSP m_rightArmMotor;
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  private Claw()
-	{
-    m_leftArmMotor = new VictorSP (RobotMap.pwmLeftArmMotor);
-    m_rightArmMotor = new VictorSP (RobotMap.pwmRightArmMotor);
+public class Claw extends Subsystem {
+	private static Claw m_singleton = null;
+	private VictorSP m_leftArmMotor;
+	private VictorSP m_rightArmMotor;
+
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
+	private Claw() {
+		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
+		m_leftArmMotor.setInverted( true );
+		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
 	}
-  @Override
-  public void initDefaultCommand() 
-  {
-    setDefaultCommand(new ArcadeLiftCommand());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
-  public void intake(double speed)
-	{
-    m_leftArmMotor.setSpeed(-1*speed);
-    m_rightArmMotor.setSpeed(speed);
-  }
-  public static Claw getInstance()
-	{
-		if(m_singleton ==  null)
-		{
+
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new ArcadeLiftCommand());
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
+
+	public void intake(double speed) {
+		m_leftArmMotor.setSpeed(speed);
+		m_rightArmMotor.setSpeed(speed);
+	}
+
+	public static Claw getInstance() {
+		if (m_singleton == null) {
 			m_singleton = new Claw();
 		}
 		return m_singleton;
