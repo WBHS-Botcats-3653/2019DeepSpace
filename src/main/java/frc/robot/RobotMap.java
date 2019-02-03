@@ -14,10 +14,16 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
+	public static final int canPDP = 0;
+	public static final int canPCM = 1;
+
 	public static final int canLeftDriveMotorMaster = 9;
 	public static final int canRightDriveMotorMaster = 10;
 	public static final int canLeftDriveMotorSlave = 12;
 	public static final int canRightDriveMotorSlave = 11;
+
+	public static final int pwmRightArmMotor = 0;
+	public static final int pwmLeftArmMotor = 1;
 
 	public static final int angSonicChannel = 0;
 }

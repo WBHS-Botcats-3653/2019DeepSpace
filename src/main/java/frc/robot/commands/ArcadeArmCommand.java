@@ -8,19 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Arm;
 import frc.robot.OI;
 
-public class ArcadeDriveCommand extends Command {
+public class ArcadeArmCommand extends Command {
+
 	private OI m_oi = null;
-	private Drive m_drive = null;
+	private Arm m_arm = null;
 
-	public ArcadeDriveCommand() {
-		super("Drive Control");
+	public ArcadeArmCommand() {
+		super("Arm Control");
 		m_oi = OI.getInstance();
-		m_drive = Drive.getInstance();
+		m_arm = Arm.getInstance();
 
-		requires(m_drive);
+		requires(m_arm);
 	}
 
 	// Called just before this Command runs the first time
@@ -31,7 +32,7 @@ public class ArcadeDriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		m_drive.arcadeDrive(m_oi.getThrottle(), m_oi.getSteering());
+		m_arm.move(m_oi.getArmCtrl());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

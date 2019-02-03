@@ -19,30 +19,38 @@ public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
 
-	private OI()
-	{
-		m_controller = new XboxController( 0 );
+	private OI() {
+		m_controller = new XboxController(0);
 	}
 
-	public static OI getInstance()
-	{
-		if(m_singleton ==  null)
-		{
+	public static OI getInstance() {
+		if (m_singleton == null) {
 			m_singleton = new OI();
 		}
 		return m_singleton;
 	}
 
-	public double getThrottle()
-	{
+	public double getThrottle() {
 		return -m_controller.getY(GenericHID.Hand.kLeft);
 	}
 
-	public double getSteering()
-	{
-		//its negative because the getX was inverted
-		return m_controller.getX(GenericHID.Hand.kRight)*0.5;
+	public double getSteering() {
+		// its negative because the getX was inverted
+		return m_controller.getX(GenericHID.Hand.kRight) * 0.5;
 	}
+
+	public double getArmCtrl() {
+		double ret_value = 0.0;
+		double up = m_controller.getTriggerAxis(GenericHID.Hand.kRight);
+		double dn = m_controller.getTriggerAxis(GenericHID.Hand.kLeft);
+		if (0.1 < up) {
+			ret_value = up;
+		} else if (0.1 < dn) {
+			ret_value = -dn;
+		}
+		return ret_value;
+	}
+
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
