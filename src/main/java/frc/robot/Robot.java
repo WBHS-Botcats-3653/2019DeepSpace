@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +28,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi = null;
 	private Drive m_drive = null;
 	private Arm m_arm = null;
-
+	private Intake m_intake =null;
 	// Command m_autonomousCommand;
 	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 		m_arm = Arm.getInstance();
+		m_intake = Intake.getInstance();
 	}
 
 	/**
@@ -64,6 +66,7 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		m_drive.arcadeDrive(0, 0);
 		m_arm.move(0);
+		m_intake.intake(0);
 	}
 
 	@Override

@@ -51,6 +51,19 @@ public class OI {
 		return ret_value;
 	}
 
+	public double getIntakeCtrl()
+	{
+		double ret_value =0.0;
+		if(m_controller.getXButton())
+		{
+			ret_value =1;
+		}
+		else if(m_controller.getYButton())
+		{
+			ret_value =-1;
+		}
+		return ret_value;
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

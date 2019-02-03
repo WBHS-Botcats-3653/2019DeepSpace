@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 
 import frc.robot.commands.ArcadeArmCommand;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * Subsystem to control the Arm. 1) Motors to raise and lower arm. 2) Absolute
@@ -22,10 +23,16 @@ public class Arm extends Subsystem {
 	private static Arm m_singleton = null;
 	private VictorSP m_leftArmMotor;
 	private VictorSP m_rightArmMotor;
+	private DigitalInput lowerLimitSwitch;
+	private DigitalInput upperLimitSwitch;
+
 
 	private Arm() {
 		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
 		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
+
+		lowerLimitSwitch = new DigitalInput(0);
+		upperLimitSwitch = new DigitalInput(1);
 		// Not working? m_rightArmMotor.setInverted( true );
 	}
 
@@ -34,10 +41,14 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new ArcadeArmCommand());
 	}
 
-	public void move(double speed) {
-		m_leftArmMotor.setSpeed(speed);
-		// Use (-speed) since setInverted(true) is not working.
-		m_rightArmMotor.setSpeed(-speed);
+	public void move(double speed) 
+	{
+		if((speed>=0 && !lowerLimitSwitch.get()) || (speed<=0 && !upperLimitSwitch.get()))
+		{
+			m_leftArmMotor.setSpeed(speed);
+			// Use (-speed) since setInverted(true) is not working.
+			m_rightArmMotor.setSpeed(-speed);
+		}
 	}
 
 	public static Arm getInstance() {
