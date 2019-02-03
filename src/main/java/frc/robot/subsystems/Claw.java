@@ -25,8 +25,8 @@ public class Claw extends Subsystem {
 	// here. Call these from Commands.
 	private Claw() {
 		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
-		m_leftArmMotor.setInverted( true );
 		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
+		// Not working? m_rightArmMotor.setInverted( false );
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Claw extends Subsystem {
 
 	public void intake(double speed) {
 		m_leftArmMotor.setSpeed(speed);
-		m_rightArmMotor.setSpeed(speed);
+		m_rightArmMotor.setSpeed(-speed);
 	}
 
 	public static Claw getInstance() {

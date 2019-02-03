@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Claw;
@@ -30,6 +32,9 @@ public class Robot extends TimedRobot {
 	public static OI m_oi = null;
 	private Drive m_drive = null;
 	private Claw m_claw = null;
+	private Compressor m_compressor = null;
+	private DoubleSolenoid m_armCtrl;
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -43,8 +48,11 @@ public class Robot extends TimedRobot {
 		m_drive = Drive.getInstance();
 		m_claw = Claw.getInstance();
 		m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+		m_compressor = new Compressor(RobotMap.pcmCanCompressor);
 		// chooser.addOption("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		m_armCtrl = new DoubleSolenoid(1,4,5);
+		
 	}
 
 	/**
@@ -73,6 +81,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		m_compressor.setClosedLoopControl(false);
 	}
 
 	/**
@@ -89,6 +98,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_armCtrl = new DoubleSolenoid(1,4,5);
 		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
@@ -114,6 +124,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		m_compressor.setClosedLoopControl(true);
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -121,6 +132,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
 	}
 
 	/**
