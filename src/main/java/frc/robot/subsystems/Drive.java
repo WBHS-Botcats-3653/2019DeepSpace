@@ -18,8 +18,6 @@ import frc.robot.commands.ArcadeDriveCommand;
  * Add your docs here.
  */
 public class Drive extends Subsystem {
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 	private static Drive m_singleton = null;
 	private WPI_TalonSRX m_leftDriveMaster, m_rightDriveMaster;
 	private WPI_VictorSPX m_leftDriveSlave, m_rightDriveSlave;
