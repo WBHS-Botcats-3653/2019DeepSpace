@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.InvertType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -39,7 +40,11 @@ public class Drive extends Subsystem {
 		m_rightDriveSlave.follow(m_rightDriveMaster);
 		m_leftDriveSlave.follow(m_leftDriveMaster);
 
+		m_leftDriveMaster.setInverted(true);
+		m_leftDriveSlave.setInverted(InvertType.FollowMaster);
+
 		m_drive = new DifferentialDrive(m_leftDriveMaster, m_rightDriveMaster);
+		m_drive.setRightSideInverted(false);
 	}
 
 	public void arcadeDrive(double xSpeed, double zRotation) {

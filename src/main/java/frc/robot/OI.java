@@ -31,7 +31,7 @@ public class OI {
 	}
 
 	public double getThrottle() {
-		return -m_controller.getY(GenericHID.Hand.kLeft);
+		return m_controller.getY(GenericHID.Hand.kLeft);
 	}
 
 	public double getSteering() {
