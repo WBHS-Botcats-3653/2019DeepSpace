@@ -26,14 +26,13 @@ public class Arm extends Subsystem {
 	private DigitalInput lowerLimitSwitch;
 	private DigitalInput upperLimitSwitch;
 
-
 	private Arm() {
 		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
 		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
+		// Not working? m_rightArmMotor.setInverted( true );
 
 		lowerLimitSwitch = new DigitalInput(0);
 		upperLimitSwitch = new DigitalInput(1);
-		// Not working? m_rightArmMotor.setInverted( true );
 	}
 
 	@Override
@@ -41,14 +40,20 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new ArcadeArmCommand());
 	}
 
-	public void move(double speed) 
-	{
-		if((speed>=0 && !lowerLimitSwitch.get()) || (speed<=0 && !upperLimitSwitch.get()))
-		{
-			m_leftArmMotor.setSpeed(speed);
-			// Use (-speed) since setInverted(true) is not working.
-			m_rightArmMotor.setSpeed(-speed);
+	public void move(double speed) {
+		if (speed > 0.0) {
+			if (upperLimitSwitch.get()) {
+				speed = 0.0;
+			}
+		} else if (speed < 0.0) {
+			if (lowerLimitSwitch.get()) {
+				speed = 0.0;
+			}
 		}
+
+		m_leftArmMotor.setSpeed(speed);
+		// Use (-speed) since setInverted(true) is not working.
+		m_rightArmMotor.setSpeed(-speed);
 	}
 
 	public static Arm getInstance() {
