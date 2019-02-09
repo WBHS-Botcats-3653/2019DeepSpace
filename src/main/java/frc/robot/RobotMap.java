@@ -22,10 +22,14 @@ public class RobotMap {
 	public static final int canLeftDriveMotorSlave = 12;
 	public static final int canRightDriveMotorSlave = 11;
 
+	public static final int dioLowerLimitSwitch = 0;
+	public static final int dioUpperLimitSwitch = 1;
+
 	public static final int pwmRightArmMotor = 0;
 	public static final int pwmLeftArmMotor = 1;
 
-	public static final int pwmIntakeMotor=2;
+	public static final int pwmIntakeMotor = 2;
 
-	public static final int angSonicChannel = 0;
+	public static final int adcEncoderChannel = 0;
+	public static final int adcSonicChannel = 1;
 }

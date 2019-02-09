@@ -9,10 +9,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.robot.commands.ArcadeArmCommand;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * Subsystem to control the Arm. 1) Motors to raise and lower arm. 2) Absolute
@@ -25,14 +26,17 @@ public class Arm extends Subsystem {
 	private VictorSP m_rightArmMotor;
 	private DigitalInput lowerLimitSwitch;
 	private DigitalInput upperLimitSwitch;
+	private AnalogInput m_encoder;
 
 	private Arm() {
 		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
 		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
 		// Not working? m_rightArmMotor.setInverted( true );
 
-		lowerLimitSwitch = new DigitalInput(0);
-		upperLimitSwitch = new DigitalInput(1);
+		lowerLimitSwitch = new DigitalInput(RobotMap.dioLowerLimitSwitch);
+		upperLimitSwitch = new DigitalInput(RobotMap.dioUpperLimitSwitch);
+
+		m_encoder = new AnalogInput(RobotMap.adcEncoderChannel);
 	}
 
 	@Override
@@ -40,16 +44,21 @@ public class Arm extends Subsystem {
 		setDefaultCommand(new ArcadeArmCommand());
 	}
 
+	private int getRawEncoder() {
+		return m_encoder.getValue();
+	}
+
 	public void move(double speed) {
 		if (speed > 0.0) {
-			if (upperLimitSwitch.get()) {
+			if (!upperLimitSwitch.get() || getRawEncoder() > 2088) {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
-			if (lowerLimitSwitch.get()) {
+			if (!lowerLimitSwitch.get() || getRawEncoder() < 1630) {
 				speed = 0.0;
 			}
 		}
+		// System.out.println(getRawEncoder());
 
 		m_leftArmMotor.setSpeed(speed);
 		// Use (-speed) since setInverted(true) is not working.

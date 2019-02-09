@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.Spark;
 
 import frc.robot.commands.ArcadeIntakeCommand;
 import frc.robot.RobotMap;
@@ -18,30 +18,30 @@ import frc.robot.RobotMap;
  */
 public class Intake extends Subsystem {
   private static Intake m_singleton = null;
-	private VictorSP m_intakeMotor;
+  private Spark m_intakeMotor;
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private Intake()
-  {
-    m_intakeMotor = new VictorSP(RobotMap.pwmIntakeMotor);
+  private Intake() {
+    m_intakeMotor = new Spark(RobotMap.pwmIntakeMotor);
   }
+
   @Override
-  public void initDefaultCommand() 
-  {
+  public void initDefaultCommand() {
     setDefaultCommand(new ArcadeIntakeCommand());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 
   public void intake(double speed) {
-		m_intakeMotor.setSpeed(speed);
-		
+    m_intakeMotor.setSpeed(speed * 0.5);
+
   }
-  
+
   public static Intake getInstance() {
-		if (m_singleton == null) {
-			m_singleton = new Intake();
-		}
-		return m_singleton;
-	}
+    if (m_singleton == null) {
+      m_singleton = new Intake();
+    }
+    return m_singleton;
+  }
 }

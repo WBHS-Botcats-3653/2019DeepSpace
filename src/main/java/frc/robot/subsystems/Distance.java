@@ -9,7 +9,7 @@ public class Distance {
 	private AnalogInput m_sonic;
 
 	private Distance() {
-		m_sonic = new AnalogInput(RobotMap.angSonicChannel);
+		m_sonic = new AnalogInput(RobotMap.adcSonicChannel);
 	}
 
 	public double getVoltage() {
