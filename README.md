@@ -28,7 +28,7 @@ The left and right Toughbox Mini gear boxes each have an optical uadrature encod
 
 ## User Interface (UI)
 The UI consists of the Xbox controller (joystick) and the Shuffleboard dashboard on the operator PC
-# Xbox Controller
+### Xbox Controller
 * Left joystick - Forward/back
 * Right joystick - Turning left/right
 * Left trigger - Arm down
@@ -37,7 +37,7 @@ The UI consists of the Xbox controller (joystick) and the Shuffleboard dashboard
 * Y Button - Intake out (while held)
 * A Button - Hatch selenoid out (while held)
 
-# Shuffleboard
+### Shuffleboard
 
 ## Glossary
 
