@@ -18,6 +18,7 @@ public class ArcadeArmCommand extends Command {
 
 	public ArcadeArmCommand() {
 		super("Arm Control");
+
 		m_oi = OI.getInstance();
 		m_arm = Arm.getInstance();
 

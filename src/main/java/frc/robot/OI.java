@@ -35,7 +35,6 @@ public class OI {
 	}
 
 	public double getSteering() {
-		// its negative because the getX was inverted
 		return m_controller.getX(GenericHID.Hand.kRight) * 0.5;
 	}
 
@@ -43,12 +42,29 @@ public class OI {
 		double ret_value = 0.0;
 		double up = m_controller.getTriggerAxis(GenericHID.Hand.kRight);
 		double dn = m_controller.getTriggerAxis(GenericHID.Hand.kLeft);
+
 		if (0.1 < up) {
 			ret_value = up;
 		} else if (0.1 < dn) {
 			ret_value = -dn;
 		}
 		return ret_value;
+	}
+
+	public double getIntakeCtrl() {
+		double ret_value = 0.0;
+
+		if (m_controller.getXButton()) {
+			ret_value = 1;
+		} else if (m_controller.getYButton()) {
+			ret_value = -1;
+		}
+
+		return ret_value;
+	}
+
+	public boolean getHatchEject() {
+		return m_controller.getAButton();
 	}
 
 	//// CREATING BUTTONS

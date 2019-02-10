@@ -12,9 +12,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Compressor;
 
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +29,8 @@ public class Robot extends TimedRobot {
 	public static OI m_oi = null;
 	private Drive m_drive = null;
 	private Arm m_arm = null;
-
+	private Intake m_intake = null;
+	private Compressor m_compressor = null;
 	// Command m_autonomousCommand;
 	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -40,6 +43,11 @@ public class Robot extends TimedRobot {
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 		m_arm = Arm.getInstance();
+		m_intake = Intake.getInstance();
+
+		m_compressor = new Compressor(RobotMap.canPCM);
+
+		m_compressor.setClosedLoopControl(true);
 	}
 
 	/**
@@ -62,8 +70,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		m_compressor.setClosedLoopControl(false);
 		m_drive.arcadeDrive(0, 0);
 		m_arm.move(0);
+		m_intake.intake(0);
 	}
 
 	@Override
@@ -85,6 +95,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_compressor.setClosedLoopControl(true);
 		// m_autonomousCommand = m_chooser.getSelected();
 
 		/*
@@ -110,6 +121,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		m_compressor.setClosedLoopControl(true);
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

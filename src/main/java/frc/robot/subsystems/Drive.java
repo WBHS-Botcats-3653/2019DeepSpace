@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
+import frc.robot.subsystems.Heading;
 import frc.robot.commands.ArcadeDriveCommand;
 
 /**
@@ -22,6 +23,7 @@ import frc.robot.commands.ArcadeDriveCommand;
  */
 public class Drive extends Subsystem {
 	private static Drive m_singleton = null;
+	private Heading m_heading = null;
 	private WPI_TalonSRX m_leftDriveMaster, m_rightDriveMaster;
 	private WPI_VictorSPX m_leftDriveSlave, m_rightDriveSlave;
 	private DifferentialDrive m_drive;
@@ -32,6 +34,10 @@ public class Drive extends Subsystem {
 	}
 
 	private Drive() {
+		setName("Drive");
+
+		m_heading = Heading.getInstance();
+
 		m_rightDriveMaster = new WPI_TalonSRX(RobotMap.canRightDriveMotorMaster);
 		m_leftDriveMaster = new WPI_TalonSRX(RobotMap.canLeftDriveMotorMaster);
 		m_rightDriveSlave = new WPI_VictorSPX(RobotMap.canRightDriveMotorSlave);
@@ -45,6 +51,10 @@ public class Drive extends Subsystem {
 
 		m_drive = new DifferentialDrive(m_leftDriveMaster, m_rightDriveMaster);
 		m_drive.setRightSideInverted(false);
+	}
+
+	public double getHeading() {
+		return m_heading.getAngle();
 	}
 
 	public void arcadeDrive(double xSpeed, double zRotation) {
