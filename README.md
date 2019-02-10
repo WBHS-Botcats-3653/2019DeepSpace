@@ -26,6 +26,19 @@ The left and right Toughbox Mini gear boxes each have an optical uadrature encod
 |Double solenoid|pcm|4|Hatch forward channel|
 |Double solenoid|pcm|5|Hatch reverse channel|
 
+## User Interface (UI)
+The UI consists of the Xbox controller (joystick) and the Shuffleboard dashboard on the operator PC
+# Xbox Controller
+* Left joystick - Forward/back
+* Right joystick - Turning left/right
+* Left trigger - Arm down
+* Right trigger - Arm up
+* X Button - Intake in (while held)
+* Y Button - Intake out (while held)
+* A Button - Hatch selenoid out (while held)
+
+# Shuffleboard
+
 ## Glossary
 
 * ADC - Analog/Digital Converter
