@@ -6,42 +6,32 @@
 * The [CTRE](http://www.ctr-electronics.com) libraries should be installed when you first build the robot code. 
 
 ## Hardware Mappings
-### CAN IDs
 
-|Device|CAN ID|Function|
-|------|------|--------|
-|PDP   | 0    | Power Distribution Panel|
-|PCM   | 1    | Pneumatic Control Module|
-|Talon SRX| 9 | Left, Rear, Master drive controller|
-|Talon SRX| 10| Right, Rear, Master drive controller|
-|Victor SPX|11| Right, Front, Slave drive controller|
-|Victor SPX|12| Left, Front, Slave drive controller|
+|Device|Module|ID|Function|
+|------|------|------|--------|
+|PDP   |can| 0    | Power Distribution Panel|
+|PCM   |can| 1    | Pneumatic Control Module|
+|Talon SRX|can| 9 | Left, Rear, Master drive controller|
+|Talon SRX|can| 10| Right, Rear, Master drive controller|
+|Victor SPX|can|11| Right, Front, Slave drive controller|
+|Victor SPX|can|12| Left, Front, Slave drive controller|
+|Limit Switch|dio|0|Arm lower limit|
+|Limit Switch|dio|1|Arm upper limit|
+|VictorSP|pwm|0|Right arm motor|
+|VictorSP|pwm|1|Left arm motor|
+|Spark|pwm|2|Intake motor|
+|MA3 Miniature Absolute Magnetic Shaft Encoder|adc|0|Arm Encoder|
+|LV‑MaxSonar‑EZ|adc|1|Distance sensor|
+|Double solenoid|pcm|4|Hatch forward channel|
+|Double solenoid|pcm|5|Hatch reverse channel|
 
-### Digital IO
+## Glossary
 
-|Device|Channel|Function|
-|------|-------|--------|
-|Limit Switch|0|Arm lower limit|
-|Limit Switch|1|Arm upper limit|
-
-### Pulse Width Modulation (PWM)
-
-|Device|Channel|Function|
-|------|-------|--------|
-|VictorSP|0|Right arm motor|
-|VictorSP|1|Left arm motor|
-|Spark|2|Intake motor|
-
-### Analog Digital Converter (ADC)
-
-|Device|Channel|Function|
-|------|-------|--------|
-|MA3 Miniature Absolute Magnetic Shaft Encoder|0|Arm Encoder|
-|LV‑MaxSonar‑EZ|1|Distance sensor|
-
-### Pneumatic Control Module (PCM)
-
-|Device|Channel|Function|
-|------|-------|--------|
-|Double solenoid|4|Hatch forward channel|
-|Double solenoid|5|Hatch reverse channel|
+* ADC - Analog/Digital Converter
+* CAN - Controller Area Network, Bi-directional data bus
+* CTRE - CTR Electronics
+* DIO - Digital Input/Output
+* FRC - FIRST Robotics Competition
+* PCM - Pneumatic Control Module
+* PDP - Power Distribution Panel
+* PWM - Pulse Width Modulation
