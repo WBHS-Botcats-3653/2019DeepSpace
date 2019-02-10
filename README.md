@@ -6,6 +6,7 @@
 * The [CTRE](http://www.ctr-electronics.com) libraries should be installed when you first build the robot code. 
 
 ## Hardware Mappings
+The left and right Toughbox Mini gear boxes each have an optical uadrature encoder installed. The encoders are wired directly to the corresponding Talon SRX drive motor. Both the practice and competion robot are using the E4T Miniature Optical Kit Encoder.
 
 |Device|Module|ID|Function|
 |------|------|------|--------|
