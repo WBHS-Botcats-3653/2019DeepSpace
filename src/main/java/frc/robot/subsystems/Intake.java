@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import frc.robot.commands.ArcadeIntakeCommand;
 import frc.robot.RobotMap;
@@ -17,31 +19,34 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Intake extends Subsystem {
-  private static Intake m_singleton = null;
-  private Spark m_intakeMotor;
+	private static Intake m_singleton = null;
+	private Spark m_intakeMotor = null;
+	private DoubleSolenoid m_hatchSolenoid = null;
 
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  private Intake() {
-    m_intakeMotor = new Spark(RobotMap.pwmIntakeMotor);
-  }
+	private Intake() {
+		setName("Intake");
 
-  @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new ArcadeIntakeCommand());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+		m_hatchSolenoid = new DoubleSolenoid(RobotMap.canPCM, RobotMap.pcmFCHatch, RobotMap.pcmRCHatch);
+		m_intakeMotor = new Spark(RobotMap.pwmIntakeMotor);
+	}
 
-  public void intake(double speed) {
-    m_intakeMotor.setSpeed(speed * 0.5);
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new ArcadeIntakeCommand());
+	}
 
-  }
+	public void intake(double speed) {
+		m_intakeMotor.setSpeed(speed * 0.5);
+	}
 
-  public static Intake getInstance() {
-    if (m_singleton == null) {
-      m_singleton = new Intake();
-    }
-    return m_singleton;
-  }
+	public void hatchEject(boolean out) {
+		m_hatchSolenoid.set(out ? Value.kReverse : Value.kForward);
+	}
+
+	public static Intake getInstance() {
+		if (m_singleton == null) {
+			m_singleton = new Intake();
+		}
+		return m_singleton;
+	}
 }

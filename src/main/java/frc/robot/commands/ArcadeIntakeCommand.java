@@ -11,46 +11,45 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Intake;
 import frc.robot.OI;
 
-public class ArcadeIntakeCommand extends Command 
-{
-  private OI m_oi = null;
+public class ArcadeIntakeCommand extends Command {
+	private OI m_oi = null;
 	private Intake m_intake = null;
 
 	public ArcadeIntakeCommand() {
 		super("Intake Control");
+
 		m_oi = OI.getInstance();
 		m_intake = Intake.getInstance();
 
 		requires(m_intake);
 	}
- 
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-  }
+	// Called just before this Command runs the first time
+	@Override
+	protected void initialize() {
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() 
-  {
-    m_intake.intake(m_oi.getIntakeCtrl());
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		m_intake.intake(m_oi.getIntakeCtrl());
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+	}
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	@Override
+	protected void interrupted() {
+	}
 }

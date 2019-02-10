@@ -29,6 +29,8 @@ public class Arm extends Subsystem {
 	private AnalogInput m_encoder;
 
 	private Arm() {
+		setName("Arm");
+
 		m_leftArmMotor = new VictorSP(RobotMap.pwmLeftArmMotor);
 		m_rightArmMotor = new VictorSP(RobotMap.pwmRightArmMotor);
 		// Not working? m_rightArmMotor.setInverted( true );
@@ -36,7 +38,7 @@ public class Arm extends Subsystem {
 		lowerLimitSwitch = new DigitalInput(RobotMap.dioLowerLimitSwitch);
 		upperLimitSwitch = new DigitalInput(RobotMap.dioUpperLimitSwitch);
 
-		m_encoder = new AnalogInput(RobotMap.adcEncoderChannel);
+		m_encoder = new AnalogInput(RobotMap.adcArmEncoderChannel);
 	}
 
 	@Override
@@ -50,15 +52,15 @@ public class Arm extends Subsystem {
 
 	public void move(double speed) {
 		if (speed > 0.0) {
-			if (!upperLimitSwitch.get() || getRawEncoder() > 2088) {
+			if (!upperLimitSwitch.get() /*|| getRawEncoder() > 2050*/) {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
-			if (!lowerLimitSwitch.get() || getRawEncoder() < 1630) {
+			if (!lowerLimitSwitch.get() /*|| getRawEncoder() < 700*/) {
 				speed = 0.0;
 			}
 		}
-		// System.out.println(getRawEncoder());
+		System.out.println(getRawEncoder());
 
 		m_leftArmMotor.setSpeed(speed);
 		// Use (-speed) since setInverted(true) is not working.

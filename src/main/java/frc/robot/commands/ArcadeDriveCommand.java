@@ -17,6 +17,7 @@ public class ArcadeDriveCommand extends Command {
 
 	public ArcadeDriveCommand() {
 		super("Drive Control");
+
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 

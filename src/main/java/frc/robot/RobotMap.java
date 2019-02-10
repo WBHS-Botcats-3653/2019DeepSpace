@@ -27,9 +27,12 @@ public class RobotMap {
 
 	public static final int pwmRightArmMotor = 0;
 	public static final int pwmLeftArmMotor = 1;
-
 	public static final int pwmIntakeMotor = 2;
 
-	public static final int adcEncoderChannel = 0;
+	public static final int adcArmEncoderChannel = 0;
 	public static final int adcSonicChannel = 1;
+
+	public static int pcmFCHatch = 5;
+	public static int pcmRCHatch = 4;
+
 }
