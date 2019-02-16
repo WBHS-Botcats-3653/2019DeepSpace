@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.CameraServer;
 
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Arm;
@@ -48,6 +49,8 @@ public class Robot extends TimedRobot {
 		m_compressor = new Compressor(RobotMap.canPCM);
 
 		m_compressor.setClosedLoopControl(true);
+
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
