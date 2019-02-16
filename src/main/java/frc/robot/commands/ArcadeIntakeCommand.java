@@ -33,7 +33,8 @@ public class ArcadeIntakeCommand extends Command {
 	@Override
 	protected void execute() {
 		m_intake.intake(m_oi.getIntakeCtrl());
-
+		m_intake.hatchEject(m_oi.getHatchEject());
+		m_intake.cargoEject(m_oi.getCargoEject());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

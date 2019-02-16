@@ -37,5 +37,8 @@ public class RobotMap {
 	public static int pcmFCHatch = 5;
 	public static int pcmRCHatch = 4;
 
+	public static int pcmFCCargo = 7;
+	public static int pcmRCCargo = 6;
+
 	public static final SPI.Port spiGyroPort = SPI.Port.kOnboardCS0;
 }

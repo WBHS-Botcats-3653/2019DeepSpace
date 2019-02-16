@@ -22,11 +22,13 @@ public class Intake extends Subsystem {
 	private static Intake m_singleton = null;
 	private Spark m_intakeMotor = null;
 	private DoubleSolenoid m_hatchSolenoid = null;
+	private DoubleSolenoid m_cargoSolenoid = null;
 
 	private Intake() {
 		setName("Intake");
 
 		m_hatchSolenoid = new DoubleSolenoid(RobotMap.canPCM, RobotMap.pcmFCHatch, RobotMap.pcmRCHatch);
+		m_cargoSolenoid = new DoubleSolenoid(RobotMap.canPCM, RobotMap.pcmFCCargo, RobotMap.pcmRCCargo);
 		m_intakeMotor = new Spark(RobotMap.pwmIntakeMotor);
 	}
 
@@ -36,11 +38,15 @@ public class Intake extends Subsystem {
 	}
 
 	public void intake(double speed) {
-		m_intakeMotor.setSpeed(speed * 0.5);
+		m_intakeMotor.setSpeed(speed);
 	}
 
 	public void hatchEject(boolean out) {
-		m_hatchSolenoid.set(out ? Value.kReverse : Value.kForward);
+		m_hatchSolenoid.set(out ? Value.kForward : Value.kReverse);
+	}
+
+	public void cargoEject(boolean out) {
+		m_cargoSolenoid.set(out ? Value.kForward : Value.kReverse);
 	}
 
 	public static Intake getInstance() {

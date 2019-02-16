@@ -35,7 +35,7 @@ public class OI {
 	}
 
 	public double getSteering() {
-		return m_controller.getX(GenericHID.Hand.kRight) * 0.5;
+		return -m_controller.getX(GenericHID.Hand.kRight);// correct stearing (-)
 	}
 
 	public double getArmCtrl() {
@@ -67,6 +67,9 @@ public class OI {
 		return m_controller.getAButton();
 	}
 
+	public boolean getCargoEject() {
+		return m_controller.getBButton();
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
