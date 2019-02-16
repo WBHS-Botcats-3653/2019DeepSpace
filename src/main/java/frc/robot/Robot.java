@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Compressor;
 
+import frc.robot.DashBoard;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
@@ -122,6 +123,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		m_compressor.setClosedLoopControl(true);
+		DashBoard.getInstance().refresh();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

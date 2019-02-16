@@ -41,11 +41,135 @@
       "autoPopulate": false,
       "autoPopulatePrefix": "Config",
       "widgetPane": {
-        "gridSize": 128.0,
+        "gridSize": 100.0,
         "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
+        "hgap": 10.0,
+        "vgap": 10.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Drive Speed",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Number Slider",
+                  "_title": "Drive",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                },
+                {
+                  "_type": "Number Slider",
+                  "_title": "Turn",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                }
+              ]
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Arm Speed",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Number Slider",
+                  "_title": "Up",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                },
+                {
+                  "_type": "Number Slider",
+                  "_title": "Down",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Arm Limit",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_title": "Arm Upper Limit"
+                },
+                {
+                  "_type": "Text View",
+                  "_title": "Arm Lower Limit"
+                }
+              ]
+            }
+          },
+          "6,0": {
+            "size": [
+              2,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Intake Speed",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Number Slider",
+                  "_title": "In",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                },
+                {
+                  "_type": "Number Slider",
+                  "_title": "Out",
+                  "Slider Settings/Min": 0.0,
+                  "Slider Settings/Max": 1.0,
+                  "Slider Settings/Block increment": 0.05
+                }
+              ]
+            }
+          },
+          "8,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Distance",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_title": "Intercept"
+                },
+                {
+                  "_type": "Text View",
+                  "_title": "Slope"
+                }
+              ]
+            }
+          }
+        }
       }
     },
     {
@@ -62,9 +186,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
+    "x": 2.0,
     "y": 0.0,
-    "width": 1280.0,
-    "height": 680.0
+    "width": 1144.0,
+    "height": 486.0
   }
 }
