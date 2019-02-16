@@ -18,9 +18,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
+	private double m_maxSpeed;
+	private double m_maxTurn;
 
 	private OI() {
 		m_controller = new XboxController(0);
+		m_maxSpeed = 1.0;
+		m_maxTurn = 1.0;
 	}
 
 	public static OI getInstance() {
@@ -30,12 +34,24 @@ public class OI {
 		return m_singleton;
 	}
 
+	public void setMaxSpeed(double mxspd) {
+		if (0.0 < mxspd && mxspd <= 1.0) {
+			m_maxSpeed = mxspd;
+		}
+	}
+
+	public void setMaxTurn(double mxturn) {
+		if (0.0 < mxturn && mxturn <= 1.0) {
+			m_maxTurn = mxturn;
+		}
+	}
+
 	public double getThrottle() {
-		return m_controller.getY(GenericHID.Hand.kLeft);
+		return m_controller.getY(GenericHID.Hand.kLeft) * m_maxSpeed;
 	}
 
 	public double getSteering() {
-		return -m_controller.getX(GenericHID.Hand.kRight);// correct stearing (-)
+		return -m_controller.getX(GenericHID.Hand.kRight) * m_maxTurn;// correct stearing (-)
 	}
 
 	public double getArmCtrl() {
