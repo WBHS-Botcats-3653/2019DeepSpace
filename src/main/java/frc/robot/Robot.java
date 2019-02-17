@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.CameraServer;
 
 import frc.robot.DashBoard;
 import frc.robot.subsystems.Drive;
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 	private Arm m_arm = null;
 	private Intake m_intake = null;
 	private Compressor m_compressor = null;
+	private DashBoard m_dash = null;
 	// Command m_autonomousCommand;
 	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -41,6 +43,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		m_dash = DashBoard.getInstance();
+
 		m_oi = OI.getInstance();
 		m_drive = Drive.getInstance();
 		m_arm = Arm.getInstance();
@@ -49,6 +53,8 @@ public class Robot extends TimedRobot {
 		m_compressor = new Compressor(RobotMap.canPCM);
 
 		m_compressor.setClosedLoopControl(true);
+
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -123,7 +129,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		m_compressor.setClosedLoopControl(true);
-		DashBoard.getInstance().refresh();
+		m_dash.refresh();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

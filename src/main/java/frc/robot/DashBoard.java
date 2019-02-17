@@ -11,6 +11,7 @@ import frc.robot.OI;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+//import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.networktables.NetworkTableEntry;
 
 /**
@@ -19,39 +20,24 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 public class DashBoard {
 	private static DashBoard m_singleton = null;
 
-	private NetworkTableEntry m_nteMaxSpeed = null;
-	private NetworkTableEntry m_nteMaxTurn = null;
-	private NetworkTableEntry m_nteMaxIn = null;
-	private NetworkTableEntry m_nteMaxOut = null;
-	private NetworkTableEntry m_nteMaxArmUpSpd = null;
-	private NetworkTableEntry m_nteMaxArmDnSpd = null;
-	private NetworkTableEntry m_nteDistB = null;
-	private NetworkTableEntry m_nteDistM = null;
-	private NetworkTableEntry m_nteArmLwLmt = null;
-	private NetworkTableEntry m_nteArmUpLmt = null;
+	private NetworkTableEntry m_nteMaxSpd = null;
+	private NetworkTableEntry m_nteMaxArmSpd = null;
+	private NetworkTableEntry m_nteMaxIntake = null;
 
 	private DashBoard() {
-		// ShuffleboardTab tabStatus = Shuffleboard.getTab("Status");
 		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
-		// ShuffleboardTab tabTest = Shuffleboard.getTab("Test");
 
-		m_nteMaxSpeed = tabConfig.addPersistent("Max Speed", 1.0).getEntry();
-		m_nteMaxTurn = tabConfig.addPersistent("Max Turn", 1.0).getEntry();
-		m_nteMaxIn = tabConfig.addPersistent("Max Intake", 0.5).getEntry();
-		m_nteMaxOut = tabConfig.addPersistent("Max Outtake", 0.5).getEntry();
-		m_nteMaxArmDnSpd = tabConfig.addPersistent("Max Arm dn", 1.0).getEntry();
-		m_nteMaxArmUpSpd = tabConfig.addPersistent("Max Arm Up", 1.0).getEntry();
-		m_nteDistB = tabConfig.addPersistent("Distance B", 0.0).getEntry();
-		m_nteDistM = tabConfig.addPersistent("Distance M", 1.0).getEntry();
-		m_nteArmLwLmt = tabConfig.addPersistent("Arm lower", 0).getEntry();
-		m_nteArmUpLmt = tabConfig.addPersistent("Arm upper", 4048).getEntry();
+		m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).getEntry();
+		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).getEntry();
+		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).getEntry();
 	}
 
 	public void refresh() {
 		OI ctrl = OI.getInstance();
 
-		ctrl.setMaxSpeed(m_nteMaxSpeed.getDouble(1.0));
-		ctrl.setMaxTurn(m_nteMaxTurn.getDouble(1.0));
+		ctrl.setMaxDriveSpeed(m_nteMaxSpd.getDouble(1.0));
+		ctrl.setMaxArmSpeed(m_nteMaxArmSpd.getDouble(1.0));
+		ctrl.setMaxIntakeSpeed(m_nteMaxIntake.getDouble(1.0));
 	}
 
 	public static DashBoard getInstance() {
@@ -60,5 +46,4 @@ public class DashBoard {
 		}
 		return m_singleton;
 	}
-
 }
