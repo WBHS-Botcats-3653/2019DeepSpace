@@ -130,6 +130,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		m_compressor.setClosedLoopControl(true);
 		m_dash.refresh();
+		m_intake.startHatchOutputIn();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

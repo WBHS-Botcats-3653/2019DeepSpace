@@ -37,16 +37,29 @@ public class Intake extends Subsystem {
 		setDefaultCommand(new ArcadeIntakeCommand());
 	}
 
+	public void startHatchOutputIn() {
+		m_hatchSolenoid.set(Value.kReverse);
+	}
+
 	public void intake(double speed) {
 		m_intakeMotor.setSpeed(speed);
 	}
 
-	public void hatchEject(boolean out) {
-		m_hatchSolenoid.set(out ? Value.kForward : Value.kReverse);
-	}
+	/*
+	 * public void hatchEject(boolean out) { m_hatchSolenoid.set(out ?
+	 * Value.kForward : Value.kReverse);//this is for holding to extend }
+	 */
 
 	public void cargoEject(boolean out) {
 		m_cargoSolenoid.set(out ? Value.kForward : Value.kReverse);
+	}
+
+	public void hatchEject() {
+		if (m_hatchSolenoid.get() == Value.kReverse) {
+			m_hatchSolenoid.set(Value.kForward);
+		} else {
+			m_hatchSolenoid.set(Value.kReverse);
+		}
 	}
 
 	public static Intake getInstance() {
