@@ -18,9 +18,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 public class OI {
 	private static OI m_singleton = null;
 	private XboxController m_controller = null;
+	private double m_maxDriveSpeed;
+	private double m_maxArmSpeed;
+	private double m_maxIntakeSpeed;
 
 	private OI() {
 		m_controller = new XboxController(0);
+		m_maxDriveSpeed = 1.0;
+		m_maxArmSpeed = 1.0;
+		m_maxIntakeSpeed = 1.0;
 	}
 
 	public static OI getInstance() {
@@ -30,12 +36,33 @@ public class OI {
 		return m_singleton;
 	}
 
+	public void setMaxDriveSpeed(double maxspd) {
+		System.out.println("setMaxDriveSpeed( " + maxspd + " )");
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxDriveSpeed = maxspd;
+		}
+	}
+
+	public void setMaxArmSpeed(double maxspd) {
+		System.out.println("setMaxArmSpeed( " + maxspd + " )");
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxArmSpeed = maxspd;
+		}
+	}
+
+	public void setMaxIntakeSpeed(double maxspd) {
+		System.out.println("setMaxIntakeSpeed( " + maxspd + " )");
+		if (0.0 < maxspd && maxspd <= 1.0) {
+			m_maxIntakeSpeed = maxspd;
+		}
+	}
+
 	public double getThrottle() {
-		return m_controller.getY(GenericHID.Hand.kLeft);
+		return m_controller.getY(GenericHID.Hand.kLeft) * m_maxDriveSpeed;
 	}
 
 	public double getSteering() {
-		return -m_controller.getX(GenericHID.Hand.kRight);// correct stearing (-)
+		return -m_controller.getX(GenericHID.Hand.kRight) * m_maxDriveSpeed;// correct stearing (-)
 	}
 
 	public double getArmCtrl() {
@@ -48,7 +75,7 @@ public class OI {
 		} else if (0.1 < dn) {
 			ret_value = -dn;
 		}
-		return ret_value;
+		return ret_value * m_maxArmSpeed;
 	}
 
 	public double getIntakeCtrl() {
@@ -60,7 +87,7 @@ public class OI {
 			ret_value = -1;
 		}
 
-		return ret_value;
+		return ret_value * m_maxIntakeSpeed;
 	}
 
 	public boolean getHatchEject() {
