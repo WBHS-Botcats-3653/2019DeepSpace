@@ -56,7 +56,7 @@ public class Arm extends Subsystem {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
-			if (!lowerLimitSwitch.get() /*|| getRawEncoder() < 700*/) {
+			if (!lowerLimitSwitch.get() || getRawEncoder() < 1175) {
 				speed = 0.0;
 			}
 		}
@@ -64,6 +64,16 @@ public class Arm extends Subsystem {
 		m_leftArmMotor.setSpeed(speed);
 		// Use (-speed) since setInverted(true) is not working.
 		m_rightArmMotor.setSpeed(-speed);
+	}
+
+	public void setArmVertical(boolean up) {
+		if (up && (getRawEncoder() < 2220 && getRawEncoder() > 2050)) {
+			move(0);
+		} else if (up && getRawEncoder() < 2169) {
+			move(0.3);
+		} else if (up && getRawEncoder() > 2169) {
+			move(-0.3);
+		}
 	}
 
 	public static Arm getInstance() {

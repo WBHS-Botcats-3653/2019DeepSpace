@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
@@ -81,7 +82,7 @@ public class OI {
 	public double getIntakeCtrl() {
 		double ret_value = 0.0;
 
-		if (m_controller.getXButton()) {
+		if (m_controller.getBumper(Hand.kRight)) {
 			ret_value = 1;
 		} else if (m_controller.getYButton()) {
 			ret_value = -1;
@@ -91,12 +92,17 @@ public class OI {
 	}
 
 	public boolean getHatchEject() {
-		return m_controller.getAButton();
+		return m_controller.getAButtonPressed();
 	}
 
 	public boolean getCargoEject() {
 		return m_controller.getBButton();
 	}
+
+	public boolean getArmPos() {
+		return m_controller.getBumper(Hand.kLeft);
+	}
+
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
