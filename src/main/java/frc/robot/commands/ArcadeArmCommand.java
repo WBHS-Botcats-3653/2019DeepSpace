@@ -34,7 +34,13 @@ public class ArcadeArmCommand extends Command {
 	@Override
 	protected void execute() {
 		m_arm.move(m_oi.getArmCtrl() * 0.75);
-		m_arm.setArmVertical(m_oi.getArmPos());
+		if (m_oi.getArmPOV() == 0) {
+			m_arm.setArmVertical(true);
+		} else if (m_oi.getArmPOV() == 90) {
+			m_arm.setArmDown(true);
+		} else if (m_oi.getArmPOV() == 270) {
+			m_arm.setArmStow(true);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

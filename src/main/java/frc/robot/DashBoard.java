@@ -24,12 +24,17 @@ public class DashBoard {
 	private NetworkTableEntry m_nteMaxArmSpd = null;
 	private NetworkTableEntry m_nteMaxIntake = null;
 
+	private NetworkTableEntry m_armEncoder = null;
+
 	private DashBoard() {
 		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
+		ShuffleboardTab tabDrive = Shuffleboard.getTab("Drive");
 
 		m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).getEntry();
 		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).getEntry();
 		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).getEntry();
+
+		m_armEncoder = tabDrive.add("Arm", 0.0).getEntry();
 	}
 
 	public void refresh() {
@@ -38,6 +43,10 @@ public class DashBoard {
 		ctrl.setMaxDriveSpeed(m_nteMaxSpd.getDouble(1.0));
 		ctrl.setMaxArmSpeed(m_nteMaxArmSpd.getDouble(1.0));
 		ctrl.setMaxIntakeSpeed(m_nteMaxIntake.getDouble(1.0));
+	}
+
+	public void updateArmAngle(double val) {
+		m_armEncoder.setDouble(val);
 	}
 
 	public static DashBoard getInstance() {

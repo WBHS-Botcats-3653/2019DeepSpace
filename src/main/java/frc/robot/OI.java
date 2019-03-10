@@ -45,14 +45,12 @@ public class OI {
 	}
 
 	public void setMaxArmSpeed(double maxspd) {
-		System.out.println("setMaxArmSpeed( " + maxspd + " )");
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxArmSpeed = maxspd;
 		}
 	}
 
 	public void setMaxIntakeSpeed(double maxspd) {
-		System.out.println("setMaxIntakeSpeed( " + maxspd + " )");
 		if (0.0 < maxspd && maxspd <= 1.0) {
 			m_maxIntakeSpeed = maxspd;
 		}
@@ -99,8 +97,8 @@ public class OI {
 		return m_controller.getBButton();
 	}
 
-	public boolean getArmPos() {
-		return m_controller.getBumper(Hand.kLeft);
+	public int getArmPOV() {
+		return m_controller.getPOV();
 	}
 
 	//// CREATING BUTTONS

@@ -21,6 +21,9 @@ import frc.robot.RobotMap;
  * range of arm.
  */
 public class Arm extends Subsystem {
+	private static final int m_encFloor = 1175;
+	//private static final int m_encVertical = 2169;
+	private static final double m_encTicksPerAngle = 11.0444;
 	private static Arm m_singleton = null;
 	private VictorSP m_leftArmMotor;
 	private VictorSP m_rightArmMotor;
@@ -52,7 +55,7 @@ public class Arm extends Subsystem {
 
 	public void move(double speed) {
 		if (speed > 0.0) {
-			if (!upperLimitSwitch.get() /*|| getRawEncoder() > 2050*/) {
+			if (!upperLimitSwitch.get() /* || getRawEncoder() > 2050 */) {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
@@ -67,11 +70,26 @@ public class Arm extends Subsystem {
 	}
 
 	public void setArmVertical(boolean up) {
-		if (up && (getRawEncoder() < 2220 && getRawEncoder() > 2050)) {
-			move(0);
-		} else if (up && getRawEncoder() < 2169) {
+		if (up) {
+			double deltaAng = 90 - getAngle();
+			if (Math.abs(deltaAng) < 5.0) {
+				move(0);
+			} else if (deltaAng > 0.0) {
+				move(0.3);
+			} else if (deltaAng < 0.0) {
+				move(-0.3);
+			}
+		}
+	}
+
+	public void setArmStow(boolean stow) {
+		if (stow) {
 			move(0.3);
-		} else if (up && getRawEncoder() > 2169) {
+		}
+	}
+
+	public void setArmDown(boolean down) {
+		if (down) {
 			move(-0.3);
 		}
 	}
@@ -81,5 +99,9 @@ public class Arm extends Subsystem {
 			m_singleton = new Arm();
 		}
 		return m_singleton;
+	}
+
+	public double getAngle() {
+		return (getRawEncoder() - m_encFloor) / m_encTicksPerAngle;
 	}
 }
