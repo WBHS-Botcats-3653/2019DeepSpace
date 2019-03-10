@@ -147,6 +147,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		m_dash.updateArmAngle(m_arm.getAngle());
+		m_oi.setRumble(m_intake.isSkiOut());
 	}
 
 	/**

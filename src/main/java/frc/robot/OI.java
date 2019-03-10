@@ -8,8 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -99,6 +100,10 @@ public class OI {
 
 	public int getArmPOV() {
 		return m_controller.getPOV();
+	}
+
+	public void setRumble(boolean is_rumble) {
+		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.5 : 0.0);
 	}
 
 	//// CREATING BUTTONS

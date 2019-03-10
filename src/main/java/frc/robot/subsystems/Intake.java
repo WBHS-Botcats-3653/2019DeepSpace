@@ -61,6 +61,10 @@ public class Intake extends Subsystem {
 		}
 	}
 
+	public boolean isSkiOut() {
+		return (m_hatchSolenoid.get()) == Value.kForward ? true : false;
+	}
+
 	public static Intake getInstance() {
 		if (m_singleton == null) {
 			m_singleton = new Intake();
