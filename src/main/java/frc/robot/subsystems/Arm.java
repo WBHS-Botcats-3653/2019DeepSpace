@@ -21,9 +21,9 @@ import frc.robot.RobotMap;
  * range of arm.
  */
 public class Arm extends Subsystem {
-	private static final int m_encFloor = 1175;
-	//private static final int m_encVertical = 2169;
+	private static final int m_maxEncoder = 4096;
 	private static final double m_encTicksPerAngle = 11.0444;
+	private static int m_encFloor = 1175;
 	private static Arm m_singleton = null;
 	private VictorSP m_leftArmMotor;
 	private VictorSP m_rightArmMotor;
@@ -69,6 +69,14 @@ public class Arm extends Subsystem {
 		m_rightArmMotor.setSpeed(-speed);
 	}
 
+	public boolean getLowerLimitSwitch() {
+		return lowerLimitSwitch.get();
+	}
+
+	public boolean getUpperLimitSwitch() {
+		return upperLimitSwitch.get();
+	}
+
 	public void setArmVertical(boolean up) {
 		if (up) {
 			double deltaAng = 90 - getAngle();
@@ -99,6 +107,12 @@ public class Arm extends Subsystem {
 			m_singleton = new Arm();
 		}
 		return m_singleton;
+	}
+
+	public static void setArmEncoderFloor(int floor) {
+		if (0 <= floor && floor < m_maxEncoder) {
+			m_encFloor = floor;
+		}
 	}
 
 	public double getAngle() {

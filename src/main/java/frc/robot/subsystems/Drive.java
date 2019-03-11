@@ -23,6 +23,8 @@ import frc.robot.commands.ArcadeDriveCommand;
  */
 public class Drive extends Subsystem {
 	private static Drive m_singleton = null;
+	private static final double m_wheelDiameter = 6.0; // inches
+	private static final int m_countPerRev = 360; // Optical encoder 360 pulse per rev
 	private Heading m_heading = null;
 	private WPI_TalonSRX m_leftDriveMaster, m_rightDriveMaster;
 	private WPI_VictorSPX m_leftDriveSlave, m_rightDriveSlave;
@@ -59,6 +61,21 @@ public class Drive extends Subsystem {
 
 	public void arcadeDrive(double xSpeed, double zRotation) {
 		m_drive.arcadeDrive(xSpeed, zRotation);
+	}
+
+	public int getLeftEncoder() {
+		return m_leftDriveMaster.getSelectedSensorPosition();
+	}
+
+	public int getRightEncoder() {
+		return m_rightDriveMaster.getSelectedSensorPosition();
+	}
+
+	public double getSpeed() {
+		int speedLeft = m_leftDriveMaster.getSelectedSensorVelocity();
+		int speedRight = m_rightDriveMaster.getSelectedSensorVelocity();
+		double speedAve = (double) (speedLeft + speedRight) / 2.0;
+		return speedAve * Math.PI * m_wheelDiameter / 12.0 / m_countPerRev;
 	}
 
 	public static Drive getInstance() {

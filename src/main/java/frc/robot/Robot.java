@@ -8,10 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-//import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.CameraServer;
 
@@ -34,8 +31,6 @@ public class Robot extends TimedRobot {
 	private Intake m_intake = null;
 	private Compressor m_compressor = null;
 	private DashBoard m_dash = null;
-	// Command m_autonomousCommand;
-	// SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -102,6 +97,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_dash.refresh();
 		m_compressor.setClosedLoopControl(true);
 		// m_autonomousCommand = m_chooser.getSelected();
 
@@ -131,13 +127,6 @@ public class Robot extends TimedRobot {
 		m_compressor.setClosedLoopControl(true);
 		m_dash.refresh();
 		m_intake.startHatchOutputIn();
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		// if (m_autonomousCommand != null) {
-		// m_autonomousCommand.cancel();
-		// }
 	}
 
 	/**
@@ -146,7 +135,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		m_dash.updateArmAngle(m_arm.getAngle());
+		m_dash.telopPeriodic();
 		m_oi.setRumble(m_intake.isSkiOut());
 	}
 
@@ -155,6 +144,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		m_dash.updateArmAngle(m_arm.getAngle());
+		m_dash.testPeriodic();
 	}
 }
