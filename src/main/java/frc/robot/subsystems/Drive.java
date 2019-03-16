@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
+import frc.robot.MotorFilter;
 import frc.robot.subsystems.Heading;
 import frc.robot.commands.ArcadeDriveCommand;
 
@@ -29,6 +30,8 @@ public class Drive extends Subsystem {
 	private WPI_TalonSRX m_leftDriveMaster, m_rightDriveMaster;
 	private WPI_VictorSPX m_leftDriveSlave, m_rightDriveSlave;
 	private DifferentialDrive m_drive;
+	private MotorFilter m_driveFilter;
+	private MotorFilter m_turnFilter;
 
 	@Override
 	public void initDefaultCommand() {
@@ -53,6 +56,9 @@ public class Drive extends Subsystem {
 
 		m_drive = new DifferentialDrive(m_leftDriveMaster, m_rightDriveMaster);
 		m_drive.setRightSideInverted(false);
+
+		m_driveFilter = new MotorFilter(10);
+		m_turnFilter = new MotorFilter(10);
 	}
 
 	public double getHeading() {
@@ -60,7 +66,7 @@ public class Drive extends Subsystem {
 	}
 
 	public void arcadeDrive(double xSpeed, double zRotation) {
-		m_drive.arcadeDrive(xSpeed, zRotation);
+		m_drive.arcadeDrive(m_driveFilter.update(xSpeed), m_turnFilter.update(zRotation));
 	}
 
 	public int getLeftEncoder() {
@@ -76,6 +82,12 @@ public class Drive extends Subsystem {
 		int speedRight = m_rightDriveMaster.getSelectedSensorVelocity();
 		double speedAve = (double) (speedLeft + speedRight) / 2.0;
 		return speedAve * Math.PI * m_wheelDiameter / 12.0 / m_countPerRev;
+	}
+
+	public void reset() {
+		m_drive.arcadeDrive(0.0, 0.0);
+		m_driveFilter.reset();
+		m_turnFilter.reset();
 	}
 
 	public static Drive getInstance() {

@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 
 import frc.robot.OI;
 import frc.robot.subsystems.Arm;
@@ -25,6 +27,8 @@ import frc.robot.subsystems.Heading;
  */
 public class DashBoard {
 	private static DashBoard m_singleton = null;
+
+	private UsbCamera cam0 = null;
 
 	// Config Tab
 	private NetworkTableEntry m_nteMaxSpd = null;
@@ -61,8 +65,11 @@ public class DashBoard {
 		m_nteDriveSpeed = tabDrive.add("Speed", 0.0).withWidget(BuiltInWidgets.kNumberBar)
 				.withProperties(Map.of("min", 0, "max", 10)).getEntry();
 		tabDrive.add("Gyro", Heading.getInstance().getGyro());
-		// CameraServer.getInstance().startAutomaticCapture();
-		// tabDrive.add("Field View", CameraServer.getInstance());
+
+		cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+		cam0.setResolution(142, 90);
+		cam0.setFPS(15);
+		tabDrive.add("Field View", cam0);
 
 		// Test Tab
 		m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).getEntry();
