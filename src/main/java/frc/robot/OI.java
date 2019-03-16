@@ -82,9 +82,9 @@ public class OI {
 		double ret_value = 0.0;
 
 		if (m_controller.getBumper(Hand.kRight)) {
-			ret_value = 1;
-		} else if (m_controller.getYButton()) {
 			ret_value = -1;
+		} else if (m_controller.getYButton()) {
+			ret_value = 1;
 		}
 
 		return ret_value * m_maxIntakeSpeed;
@@ -103,7 +103,7 @@ public class OI {
 	}
 
 	public void setRumble(boolean is_rumble) {
-		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.5 : 0.0);
+		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);
 	}
 
 	//// CREATING BUTTONS

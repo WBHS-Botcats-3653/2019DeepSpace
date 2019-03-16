@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 
 import frc.robot.DashBoard;
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
 	private Intake m_intake = null;
 	private Compressor m_compressor = null;
 	private DashBoard m_dash = null;
+	private UsbCamera cam0 = null;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -49,7 +51,9 @@ public class Robot extends TimedRobot {
 
 		m_compressor.setClosedLoopControl(true);
 
-		CameraServer.getInstance().startAutomaticCapture();
+		cam0 = CameraServer.getInstance().startAutomaticCapture(0);
+		cam0.setResolution(142, 90);
+		cam0.setFPS(15);
 	}
 
 	/**
@@ -145,5 +149,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 		m_dash.testPeriodic();
+		//System.out.println(m_arm.getRawEncoder());
 	}
 }

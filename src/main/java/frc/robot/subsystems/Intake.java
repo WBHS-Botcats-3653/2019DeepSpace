@@ -38,7 +38,7 @@ public class Intake extends Subsystem {
 	}
 
 	public void startHatchOutputIn() {
-		m_hatchSolenoid.set(Value.kReverse);
+		m_hatchSolenoid.set(Value.kForward);
 	}
 
 	public void intake(double speed) {
