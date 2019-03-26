@@ -46,7 +46,6 @@ public class DashBoard {
 	// Drive Tab
 	private NetworkTableEntry m_nteArmAngle = null;
 	private NetworkTableEntry m_nteDriveSpeed = null;
-	// private NetworkTableEntry m_nteGyro = null;
 
 	private DashBoard() {
 		ShuffleboardTab tabConfig = Shuffleboard.getTab("Config");
@@ -54,29 +53,31 @@ public class DashBoard {
 		ShuffleboardTab tabTest = Shuffleboard.getTab("Test");
 
 		// Config Tab
-		m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).getEntry();
-		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).getEntry();
-		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).getEntry();
-		m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).getEntry();
+		m_nteMaxSpd = tabConfig.addPersistent("Max Speed", 1.0).withSize(1, 1).withPosition(0, 0).getEntry();
+		m_nteMaxIntake = tabConfig.addPersistent("Max Intake", 1.0).withSize(1, 1).withPosition(1, 0).getEntry();
+		m_nteMaxArmSpd = tabConfig.addPersistent("Max Arm Spd", 1.0).withSize(1, 1).withPosition(2, 0).getEntry();
+		m_nteArmDownEnc = tabConfig.addPersistent("Arm Down", 1024.0).withSize(1, 1).withPosition(3, 0).getEntry();
 
 		// Drive Tab
-		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
-				.withProperties(Map.of("min", 0, "max", 180)).getEntry();
-		m_nteDriveSpeed = tabDrive.add("Speed", 0.0).withWidget(BuiltInWidgets.kNumberBar)
-				.withProperties(Map.of("min", 0, "max", 10)).getEntry();
-		tabDrive.add("Gyro", Heading.getInstance().getGyro());
-
 		cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(142, 90);
 		cam0.setFPS(15);
-		tabDrive.add("Field View", cam0);
+		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(0, 0);
+
+		tabDrive.add("Gyro", Heading.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
+
+		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
+				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(4, 0).getEntry();
+
+		m_nteDriveSpeed = tabDrive.add("Speed", 0.0).withWidget(BuiltInWidgets.kNumberBar)
+				.withProperties(Map.of("min", 0, "max", 10)).withSize(1, 1).withPosition(4, 1).getEntry();
 
 		// Test Tab
-		m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).getEntry();
-		m_nteDriveEncLeft = tabTest.add("Drive Left", 0).getEntry();
-		m_nteDriveEncRight = tabTest.add("Drive Right", 0).getEntry();
-		m_nteArmDnLimit = tabTest.add("Arm Down", false).getEntry();
-		m_nteArmUpLimit = tabTest.add("Arm Up", false).getEntry();
+		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
+		m_nteArmUpLimit = tabTest.add("Arm Up", false).withSize(1, 1).withPosition(1, 0).getEntry();
+		m_nteArmEncoderRaw = tabTest.add("Arm Encoder", 1024).withSize(1, 1).withPosition(2, 0).getEntry();
+		m_nteDriveEncLeft = tabTest.add("Drive Left", 0).withSize(1, 1).withPosition(0, 1).getEntry();
+		m_nteDriveEncRight = tabTest.add("Drive Right", 0).withSize(1, 1).withPosition(1, 1).getEntry();
 	}
 
 	public void refresh() {
