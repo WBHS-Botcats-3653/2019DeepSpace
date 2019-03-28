@@ -67,10 +67,10 @@ public class DashBoard {
 		tabDrive.add("Gyro", Heading.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
 
 		m_nteArmAngle = tabDrive.add("Arm", 0.0).withWidget(BuiltInWidgets.kDial)
-				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(4, 0).getEntry();
+				.withProperties(Map.of("min", 0, "max", 180)).withSize(1, 1).withPosition(5, 0).getEntry();
 
 		m_nteDriveSpeed = tabDrive.add("Speed", 0.0).withWidget(BuiltInWidgets.kNumberBar)
-				.withProperties(Map.of("min", 0, "max", 10)).withSize(1, 1).withPosition(4, 1).getEntry();
+				.withProperties(Map.of("min", 0, "max", 10)).withSize(1, 1).withPosition(6, 0).getEntry();
 
 		// Test Tab
 		m_nteArmDnLimit = tabTest.add("Arm Down", false).withSize(1, 1).withPosition(0, 0).getEntry();
