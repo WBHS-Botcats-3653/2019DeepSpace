@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -32,6 +34,7 @@ public class Drive extends Subsystem {
 	private DifferentialDrive m_drive;
 	private MotorFilter m_driveFilter;
 	private MotorFilter m_turnFilter;
+	private DoubleSolenoid m_climbSolenoid = null;
 
 	@Override
 	public void initDefaultCommand() {
@@ -59,6 +62,8 @@ public class Drive extends Subsystem {
 
 		m_driveFilter = new MotorFilter(10);
 		m_turnFilter = new MotorFilter(10);
+
+		m_climbSolenoid = new DoubleSolenoid(RobotMap.canPCM, RobotMap.pcmFCClimb, RobotMap.pcmRCClimb);
 	}
 
 	public double getHeading() {
@@ -82,6 +87,14 @@ public class Drive extends Subsystem {
 		int speedRight = m_rightDriveMaster.getSelectedSensorVelocity();
 		double speedAve = (double) (speedLeft + speedRight) / 2.0;
 		return speedAve * Math.PI * m_wheelDiameter / 12.0 / m_countPerRev;
+	}
+
+	public void climbEject() {
+		if (m_climbSolenoid.get() == Value.kReverse) {
+			m_climbSolenoid.set(Value.kForward);
+		} else {
+			m_climbSolenoid.set(Value.kReverse);
+		}
 	}
 
 	public void reset() {

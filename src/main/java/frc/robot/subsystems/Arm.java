@@ -59,7 +59,7 @@ public class Arm extends Subsystem {
 				speed = 0.0;
 			}
 		} else if (speed < 0.0) {
-			if (!lowerLimitSwitch.get() || getRawEncoder() < m_encFloor) {
+			if (!lowerLimitSwitch.get()/* || getRawEncoder() < m_encFloor*/) {
 				speed = 0.0;
 			}
 		}

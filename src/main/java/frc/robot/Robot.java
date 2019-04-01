@@ -96,6 +96,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		m_dash.refresh();
 		m_compressor.setClosedLoopControl(true);
+		m_intake.startHatchOutputIn();
 		// m_autonomousCommand = m_chooser.getSelected();
 
 		/*
@@ -117,6 +118,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		m_dash.telopPeriodic();
+		m_oi.setRumble(m_intake.isSkiOut());
 	}
 
 	@Override

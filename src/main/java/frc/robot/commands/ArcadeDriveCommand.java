@@ -33,6 +33,10 @@ public class ArcadeDriveCommand extends Command {
 	@Override
 	protected void execute() {
 		m_drive.arcadeDrive(m_oi.getThrottle(), m_oi.getSteering());
+		if (m_oi.getClimbEject()) 
+		{
+			m_drive.climbEject();
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

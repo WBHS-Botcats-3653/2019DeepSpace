@@ -98,9 +98,14 @@ public class OI {
 		return m_controller.getBButton();
 	}
 
+	public boolean getClimbEject() {
+		return m_controller.getXButtonPressed();
+	}
+
 	public int getArmPOV() {
 		return m_controller.getPOV();
 	}
+
 
 	public void setRumble(boolean is_rumble) {
 		m_controller.setRumble(RumbleType.kLeftRumble, is_rumble ? 0.0 : 0.5);

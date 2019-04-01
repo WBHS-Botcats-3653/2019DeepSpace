@@ -61,7 +61,7 @@ public class DashBoard {
 		// Drive Tab
 		cam0 = CameraServer.getInstance().startAutomaticCapture(0);
 		cam0.setResolution(142, 90);
-		cam0.setFPS(15);
+		cam0.setFPS(20);
 		tabDrive.add("Field View", cam0).withSize(3, 2).withPosition(0, 0);
 
 		tabDrive.add("Gyro", Heading.getInstance().getGyro()).withSize(2, 2).withPosition(3, 0);
